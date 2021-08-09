@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModel="clr-namespace:IMC.App.ViewModels"
+             x:Class="IMC.App.Views.IndexPage">
+
+    <ContentPage.BindingContext>
+        <ViewModel:IndexViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center" 
+                     HorizontalOptions="Center">
+
+            <Frame BackgroundColor="Red"
+                   Padding="24"
+                   CornerRadius="15">
+                <Label Text="Calcula tu IMC"
+                       TextColor="Black"
+                       FontSize="36"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"/>
+
+            </Frame>
+
+            <Label Text="Peso(KG)"/>
+            <Entry Placeholder="Peso(KG)"
+                   Keyboard="Numeric"
+                   x:Name="Peso"
+                   Text="{Binding Peso}"/>
+
+            <Label Text="Altura(CM)"/>
+            <Entry Placeholder="Altura(CM)"
+                   Keyboard="Numeric"
+                   x:Name="Altura"
+                   Text="{Binding Altura}"/>
+
+            <Label Text="Tu(IMC)"/>
+            <Entry Placeholder="Tu(IMC)"
+                   x:Name="IMC"
+                   IsEnabled="False"
+                   Text="{Binding IMC}"/>
+
+            <Button Text="Calcular" 
+                    x:Name="Calcular"
+                    Background="black"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="15"
+                    Command="{Binding CalcularCommand}"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
