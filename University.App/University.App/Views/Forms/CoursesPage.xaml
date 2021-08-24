@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BindingContext="{Binding Main,Source={StaticResource Locator}}"
+             x:Class="University.App.Views.Forms.CoursesPage">
+    <ContentPage.Content>
+        <StackLayout BindingContext="{Binding Courses}"
+                     Padding="20"
+                     VerticalOptions="Center">
+
+
+            <Frame BackgroundColor="Black"
+                   CornerRadius="14">
+                <Label Text="COURSES" TextColor="White" FontSize="38" HorizontalTextAlignment="Center"/>
+
+
+
+            </Frame>
+            
+
+            <Frame BorderColor="Black" CornerRadius="14"
+                   BackgroundColor="Gray">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="ID"/>
+                    <Label Grid.Column="1" Text="Title" HorizontalOptions="Center"/>
+                </Grid>
+
+            </Frame>
+
+
+
+
+
+            <ListView ItemsSource="{Binding Courses}"
+                      HasUnevenRows="True"
+                      IsPullToRefreshEnabled="True"
+                      IsRefreshing="{Binding IsRefreshing}"
+                      RefreshCommand="{Binding RefreshCommand}">
+
+
+
+                <ListView.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <ViewCell>
+
+                            <Frame BorderColor="Black" CornerRadius="14">
+
+                                <Grid>
+
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0" Text="{Binding CourseID}"/>
+                                    <Label Grid.Column="1" Text="{Binding Title}" HorizontalOptions="Center"/>
+                                </Grid>
+
+                            </Frame>
+
+                        </ViewCell>
+
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+
+
+            </ListView>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
