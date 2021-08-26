@@ -7,10 +7,13 @@ namespace University.App.ViewModels
     public class MainViewModel
     {
         public CoursesViewModel Courses { get; set; }
+        public StudentViewModel Students { get; set; }
 
         public MainViewModel()
         {
             this.Courses = new CoursesViewModel();
+            this.Students = new StudentViewModel();
         }
+     
     }
 }
