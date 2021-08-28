@@ -14,8 +14,8 @@ namespace University.App.ViewModels.Forms
         #region Fields
         private ApiService _apiService;
         private bool _isRefreshing;
-        private ObservableCollection<CourseDTO> _Courses;
-        private List<CourseDTO> _allCourses;
+        private ObservableCollection<CourseItemViewModel> _Courses;
+        private List<CourseItemViewModel> _allCourses;
         private string _filter;
         #endregion
 
@@ -27,7 +27,7 @@ namespace University.App.ViewModels.Forms
             set { this.SetValue(ref this._isRefreshing, value); }
         }
 
-        public ObservableCollection<CourseDTO> Courses
+        public ObservableCollection<CourseItemViewModel> Courses
         {
             get { return this._Courses; }
             set { this.SetValue(ref this._Courses, value); }
@@ -70,10 +70,10 @@ namespace University.App.ViewModels.Forms
                     return;
                 }
 
-                var responseDTO = await _apiService.RequestAPI<List<CourseDTO>>(Endpoints.URL_BASE_UNIVERSITY_API, Endpoints.GET_COURSES, null, ApiService.Method.Get);
+                var responseDTO = await _apiService.RequestAPI<List<CourseItemViewModel>>(Endpoints.URL_BASE_UNIVERSITY_API, Endpoints.GET_COURSES, null, ApiService.Method.Get);
 
-                this._allCourses = (List<CourseDTO>)responseDTO.Data;
-                this.Courses = new ObservableCollection<CourseDTO>((List<CourseDTO>)this._allCourses);
+                this._allCourses = (List<CourseItemViewModel>)responseDTO.Data;
+                this.Courses = new ObservableCollection<CourseItemViewModel>(this._allCourses);
                 this.IsRefreshing = false;
             }
             catch (Exception ex)
@@ -91,7 +91,7 @@ namespace University.App.ViewModels.Forms
             if (!string.IsNullOrEmpty(this.Filter))
                 courses = courses.Where(x => x.Title.ToLower().Contains(this.Filter)).ToList();
 
-            this.Courses = new ObservableCollection<CourseDTO>(courses);
+            this.Courses = new ObservableCollection<CourseItemViewModel>(courses);
 
             courses = courses.Where(x => x.Title.ToLower().Contains(this.Filter) || x.Credits.ToString().Contains(this.Filter)).ToList();
         }
