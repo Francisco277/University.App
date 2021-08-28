@@ -94,9 +94,10 @@ namespace University.App.ViewModels.Forms
                     Title = this.Tittle,
                     Credits = this.Credits
                 };
-
+                var massage = "The process is successful";
                 var responseDTO = await _apiService.RequestAPI<CourseDTO>(Endpoints.URL_BASE_UNIVERSITY_API, Endpoints.POST_COURSES, courseDTO, ApiService.Method.Post);
-
+                if (responseDTO.Code < 200 || responseDTO.Code > 200)
+                    massage = responseDTO.Message;
                 this.IsEnabled = true;
                 this.IsRunning = false;
 
@@ -104,7 +105,7 @@ namespace University.App.ViewModels.Forms
                 this.Tittle = string.Empty;
 
 
-                await Application.Current.MainPage.DisplayAlert("Notification", "The process is Successful", "Cancel");
+                await Application.Current.MainPage.DisplayAlert("Notification", massage, "Cancel");
 
             }
             catch (Exception ex)

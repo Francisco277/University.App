@@ -22,8 +22,13 @@
 
 
             </Frame>
-            
 
+            <SearchBar Placeholder="Search..."
+                       HeightRequest="30"
+                       TextTransform="Lowercase"
+                       Text="{Binding Filter}"/>
+            
+            
             <Frame BorderColor="Black" CornerRadius="14"
                    BackgroundColor="Gray">
 
