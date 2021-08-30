@@ -3,6 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              BindingContext="{Binding Main,Source={StaticResource Locator}}"
              x:Class="University.App.Views.Forms.StudentsPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_action_add_circle"
+                     Command="{Binding CreateStudentCommand}"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <StackLayout BindingContext="{Binding Students}"
                      Padding="20"
@@ -13,6 +19,11 @@
                 <Label Text="STUDENTS" TextColor="White" FontSize="38" HorizontalTextAlignment="Center"/>
                 
             </Frame>
+
+            <SearchBar Placeholder="Search..."
+                       HeightRequest="30"
+                       TextTransform="Lowercase"
+                       Text="{Binding FilterByStudents}"/>
 
             <Frame BorderColor="Black" CornerRadius="14"
                    BackgroundColor="Gray">

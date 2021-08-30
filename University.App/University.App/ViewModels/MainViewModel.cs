@@ -12,17 +12,21 @@ namespace University.App.ViewModels
         public CoursesViewModel Courses { get; set; }
         public StudentViewModel Students { get; set; }
         public CreateCourseViewModel CreateCourse { get; set; }
+        public CreateStudentViewModel CreateStudent { get; set; }
 
         public MainViewModel()
         {
             instance = this;
             this.Courses = new CoursesViewModel();
             this.Students = new StudentViewModel();
-            this.CreateCourseCommand = new Command(GoToCreateCourse); 
+            this.CreateCourseCommand = new Command(GoToCreateCourse);
+            this.CreateStudentCommand = new Command(GoToCreateStudent);
+
 
         }
         #region Commands
         public Command CreateCourseCommand { get; set; }
+        public Command CreateStudentCommand { get; set; }
         #endregion
 
         #region Methods
@@ -30,6 +34,11 @@ namespace University.App.ViewModels
         {
             GetInstance().CreateCourse = new CreateCourseViewModel();
             await Application.Current.MainPage.Navigation.PushAsync(new CreateCoursesPage());
+        }
+        async void GoToCreateStudent()
+        {
+            GetInstance().CreateStudent = new CreateStudentViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new CreateStudentsPage());
         }
         #endregion
 

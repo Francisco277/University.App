@@ -14,5 +14,12 @@ namespace University.BL.DTOs
 
         [Required(ErrorMessage ="The StudentFullName is Required")]
         public string FullName { get; set; }
+
+        [Required(ErrorMessage = "The LastName is Required")]
+        public string LastName { get; set; }
+        [Required(ErrorMessage = "The FirstMidName is Required")]
+        public string FirstMidName { get; set; }
+        [Required(ErrorMessage = "The EnrollmentDate is Required")]
+        public DateTime EnrollmentDate { get; set; }
     }
 }

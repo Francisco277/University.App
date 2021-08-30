@@ -6,6 +6,8 @@ using University.App.Helpers;
 using University.BL.Services.Implements;
 using Xamarin.Forms;
 using University.BL.DTOs;
+using System.Linq;
+
 namespace University.App.ViewModels.Forms
 {
    public class StudentViewModel : BaseViewModel
@@ -13,7 +15,9 @@ namespace University.App.ViewModels.Forms
         #region Fields
         private ApiService _apiService;
         private bool _isRefreshing;
-        private ObservableCollection<StudentDTO> _Students;
+        private ObservableCollection<StudentItemViewModel> _Students;
+        private List<StudentItemViewModel> _allStudents;
+        private string _filterByStudents;
         #endregion
 
         #region Properties
@@ -22,15 +26,24 @@ namespace University.App.ViewModels.Forms
             get { return this._isRefreshing; }
             set { this.SetValue(ref this._isRefreshing, value); }
         }
-         public ObservableCollection<StudentDTO> Students
+         public ObservableCollection<StudentItemViewModel> Students
         {
             get { return this._Students; }
             set { this.SetValue(ref this._Students, value); }
         }
+        public string FilterByStudents
+        {
+            get { return this._filterByStudents; }
+            set
+            {
+                this.SetValue(ref this._filterByStudents, value);
+                this.GetStudentsByFilter();
+            }
+        }
 
         #endregion
 
-        #region Constructor
+            #region Constructor
         public StudentViewModel()
         {
             this._apiService = new ApiService();
@@ -54,8 +67,9 @@ namespace University.App.ViewModels.Forms
                     return;
                 }
 
-                var responseDTO = await _apiService.RequestAPI<List<StudentDTO>>(Endpoints.URL_BASE_UNIVERSITY_API, Endpoints.GET_STUDENTS, null, ApiService.Method.Get);
-                this.Students = new ObservableCollection<StudentDTO>((List<StudentDTO>)responseDTO.Data);
+                var responseDTO = await _apiService.RequestAPI<List<StudentItemViewModel>>(Endpoints.URL_BASE_UNIVERSITY_API, Endpoints.GET_STUDENTS, null, ApiService.Method.Get);
+                this._allStudents = (List<StudentItemViewModel>)responseDTO.Data;
+                this.Students = new ObservableCollection<StudentItemViewModel>(this._allStudents);
                 this.IsRefreshing = false;
             }
             catch (Exception ex)
@@ -63,6 +77,15 @@ namespace University.App.ViewModels.Forms
                 this.IsRefreshing = false;
                 await Application.Current.MainPage.DisplayAlert("Notification", ex.Message, "Cancel");
             }
+        }
+
+        void GetStudentsByFilter()
+        {
+            var students = this._allStudents;
+            if (!string.IsNullOrEmpty(this.FilterByStudents))
+                students = students.Where(x => x.FullName.ToLower().Contains(this.FilterByStudents)).ToList();
+
+            this.Students = new ObservableCollection<StudentItemViewModel>(students);
         }
 
         #endregion
