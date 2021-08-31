@@ -12,6 +12,8 @@ namespace University.App.ViewModels
         public CoursesViewModel Courses { get; set; }
         public StudentViewModel Students { get; set; }
         public CreateCourseViewModel CreateCourse { get; set; }
+        public EditCourseViewModel EditCourse { get; set; }
+
         public CreateStudentViewModel CreateStudent { get; set; }
 
         public MainViewModel()

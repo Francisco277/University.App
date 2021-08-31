@@ -71,15 +71,23 @@
 
                                 <Grid>
 
+                                    <Grid.GestureRecognizers>
+                                        
+                                        <TapGestureRecognizer Command="{Binding EditCourseCommand}"/>
+                                        
+                                    </Grid.GestureRecognizers>
+                                    
                                     <Grid.ColumnDefinitions>
 
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
-
+                                        <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
 
                                     <Label Grid.Column="0" Text="{Binding CourseID}"/>
                                     <Label Grid.Column="1" Text="{Binding Title}" HorizontalOptions="Center"/>
+                                    <ImageButton Grid.Column="2" Source="ic_delete" 
+                                                 BackgroundColor="Transparent" Command="{Binding DeleteCourseCommand}"/>
                                 </Grid>
 
                             </Frame>

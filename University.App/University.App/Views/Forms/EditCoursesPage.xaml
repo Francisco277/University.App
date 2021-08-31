@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              BindingContext="{Binding Main,Source={StaticResource Locator}}"
+             x:Class="University.App.Views.Forms.EditCoursesPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView BindingContext="{Binding EditCourse}">
+                <StackLayout Padding="20"
+                         VerticalOptions="Start">
+
+                    <Frame BackgroundColor="Black"
+                   CornerRadius="14">
+                        <Label Text="EDIT" TextColor="White" FontSize="19" HorizontalTextAlignment="Center"/>
+                    </Frame>
+
+
+                    <Grid Margin="10, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Text="ID" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
+                        <Entry IsEnabled="False" Grid.Row="0" Grid.Column="1" Text="{Binding Course.CourseID}"/>
+
+                        <Label Text="Tittle" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
+                        <Entry  Grid.Row="1" Grid.Column="1" Text="{Binding Course.Title}"/>
+
+                        <Label Text="Credits" Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
+                        <Entry Keyboard="Numeric" Grid.Row="2" Grid.Column="1" Text="{Binding Course.Credits}"/>
+                    </Grid>
+
+                    <Button Text="Save" 
+                        CornerRadius="23" 
+                        HeightRequest="46" 
+                        Background="Black" 
+                        TextColor="White"
+                        Command="{Binding EditCourseCommand}"
+                        IsEnabled="{Binding IsEnabled}"/>
+
+                    <ActivityIndicator
+                    IsRunning="{Binding IsRunning}"/>
+
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
