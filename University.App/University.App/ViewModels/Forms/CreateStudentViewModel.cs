@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace University.App.ViewModels.Forms
 {
-   public class CreateStudentViewModel : BaseViewModel
+    public class CreateStudentViewModel : BaseViewModel
     {
         #region Fields 
         private ApiService _apiService;
@@ -69,8 +69,8 @@ namespace University.App.ViewModels.Forms
             try
             {
                 if (string.IsNullOrEmpty(this.Lastname) ||
-                    string.IsNullOrEmpty(this.Enrollmentdate.ToString()) 
-                    ||string.IsNullOrEmpty (this.Firstmidname))
+                    string.IsNullOrEmpty(this.Enrollmentdate.ToString())
+                    || string.IsNullOrEmpty(this.Firstmidname))
                 {
                     await Application.Current.MainPage.DisplayAlert("Notification", "The fields are required", "Cancel");
                     return;
@@ -93,8 +93,8 @@ namespace University.App.ViewModels.Forms
                 {
                     EnrollmentDate = this.Enrollmentdate,
                     LastName = this.Lastname,
-                     FirstMidName =this.Firstmidname
-                    
+                    FirstMidName = this.Firstmidname
+
                 };
 
                 var massage = "The process is successful";
@@ -121,7 +121,7 @@ namespace University.App.ViewModels.Forms
 
         #endregion
 
-                #region Commands 
+        #region Commands 
         public Command CreateStudentCommand { get; set; }
         #endregion
     }
