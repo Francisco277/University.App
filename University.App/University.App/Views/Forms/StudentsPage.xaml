@@ -50,37 +50,45 @@
                       IsRefreshing="{Binding IsRefreshing}"
                       RefreshCommand="{Binding RefreshCommand}">
 
-                <ListView.ItemTemplate>
+            <ListView.ItemTemplate>
 
-                    <DataTemplate>
+                <DataTemplate>
 
-                        <ViewCell>
+                    <ViewCell>
 
-                            <Frame BorderColor="Black" CornerRadius="14">
+                        <Frame BorderColor="Black" CornerRadius="14">
 
-                                <Grid>
+                            <Grid>
+
+                                    <Grid.GestureRecognizers>
+
+                                        <TapGestureRecognizer Command="{Binding EditStudentCommand}"/>
+
+                                    </Grid.GestureRecognizers>
+
 
                                     <Grid.ColumnDefinitions>
 
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
 
-                                    </Grid.ColumnDefinitions>
+                                </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Column="0" Text="{Binding ID}"/>
-                                    <Label Grid.Column="1" Text="{Binding FullName}" HorizontalOptions="Center"/>
-                                </Grid>
+                                <Label Grid.Column="0" Text="{Binding ID}"/>
+                                <Label Grid.Column="1" Text="{Binding FullName}" HorizontalOptions="Center"/>
+                                <ImageButton Grid.Column="2" Source="ic_delete"
+                                                 BackgroundColor="Transparent" Command="{Binding DeleteStudentCommand}"/>
+                            </Grid>
 
-                            </Frame>
+                        </Frame>
 
-                        </ViewCell>
+                    </ViewCell>
 
-                    </DataTemplate>
+                </DataTemplate>
 
-                </ListView.ItemTemplate>
-
+            </ListView.ItemTemplate>
             </ListView>
-            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

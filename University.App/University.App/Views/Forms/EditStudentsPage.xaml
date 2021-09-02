@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              BindingContext="{Binding Main,Source={StaticResource Locator}}"
+             x:Class="University.App.Views.Forms.EditStudentsPage">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <ScrollView BindingContext="{Binding EditStudent}">
+                <StackLayout Padding="20"
+                         VerticalOptions="Start">
+
+                    <Frame BackgroundColor="Black"
+                   CornerRadius="14">
+                        <Label Text="EDIT STUDENTS" TextColor="White" FontSize="19" HorizontalTextAlignment="Center"/>
+                    </Frame>
+
+
+                    <Grid Margin="10, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+
+                        <Label Text="ID" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
+                        <Entry  Grid.Row="0" Grid.Column="1" Text="{Binding Student.ID}"/>
+
+                        <Label Text="DATETIME" Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
+                        <DatePicker  Grid.Row="2" Grid.Column="1" Date="{Binding Student.EnrollmentDate}"/>
+
+
+                        <Label Text="LASTNAME" Grid.Row="3" Grid.Column="0" VerticalOptions="Center"/>
+                        <Entry  Grid.Row="3" Grid.Column="1" Text="{Binding Student.LastName}"/>
+
+                        <Label Text="FIRSTMIDNAME" Grid.Row="4" Grid.Column="0" VerticalOptions="Center"/>
+                        <Entry  Grid.Row="4" Grid.Column="1"  Text="{Binding Student.FirstMidName}"/>
+                    </Grid>
+
+                    <Button Text="Save" 
+                        CornerRadius="23" 
+                        HeightRequest="46" 
+                        Background="Black" 
+                        TextColor="White"
+                        Command="{Binding EditStudentCommand}"
+                        IsEnabled="{Binding IsEnabled}"/>
+
+                    <ActivityIndicator
+                    IsRunning="{Binding IsRunning}"/>
+
+
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

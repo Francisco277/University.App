@@ -13,6 +13,7 @@ namespace University.App.ViewModels
         public StudentViewModel Students { get; set; }
         public CreateCourseViewModel CreateCourse { get; set; }
         public EditCourseViewModel EditCourse { get; set; }
+       public EditStudentViewModel EditStudent { get; set; }
 
         public CreateStudentViewModel CreateStudent { get; set; }
 

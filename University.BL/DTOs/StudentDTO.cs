@@ -21,5 +21,6 @@ namespace University.BL.DTOs
         public string FirstMidName { get; set; }
         [Required(ErrorMessage = "The EnrollmentDate is Required")]
         public DateTime EnrollmentDate { get; set; }
-    }
+      
+    } 
 }

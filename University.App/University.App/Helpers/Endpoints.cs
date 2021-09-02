@@ -18,5 +18,7 @@ namespace University.App.Helpers
         public static string DELETE_COURSES { get; set; } = "api/Courses/";
 
         public static string PUT_COURSES { get; set; } = "api/Courses/";
+        public static string DELETE_STUDENTS { get; set; } = "api/Students/";
+        public static string PUT_STUDENTS { get; set; } = "api/Students/";
     }
 }
