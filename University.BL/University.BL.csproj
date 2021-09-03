@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTOs\CourseDTO.cs" />
+    <Compile Include="DTOs\InstructorDTO.cs" />
+    <Compile Include="DTOs\OfficeDTO.cs" />
     <Compile Include="DTOs\ResponseDTO.cs" />
     <Compile Include="DTOs\StudentDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

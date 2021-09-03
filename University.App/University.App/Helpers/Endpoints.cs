@@ -20,5 +20,13 @@ namespace University.App.Helpers
         public static string DELETE_STUDENTS { get; set; } = "api/Students/";
         public static string PUT_STUDENTS { get; set; } = "api/Students/";
         #endregion
+
+        #region INSTRUCTORS
+        public static string GET_INSTRUCTORS { get; set; } = "api/Instructors/GetInstructors/";
+        #endregion
+
+        #region OFFICE
+        public static string POST_OFFICES { get; set; } = "api/OfficeAssignments/";
+        #endregion
     }
 }

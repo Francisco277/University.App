@@ -51,6 +51,8 @@ namespace University.App.ViewModels.Forms
             set { this.SetValue(ref this._credits, value); }
         }
 
+        #endregion
+
         #region constructor
         public CreateCourseViewModel()
         {
@@ -118,7 +120,7 @@ namespace University.App.ViewModels.Forms
         }
         #endregion
 
-        #endregion
+       
 
         #region Commands
         public Command CreateCourseCommand { get; set; }
