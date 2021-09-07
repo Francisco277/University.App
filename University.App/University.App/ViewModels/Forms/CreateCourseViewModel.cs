@@ -98,7 +98,7 @@ namespace University.App.ViewModels.Forms
                 };
                 var massage = "The process is successful";
                 var responseDTO = await _apiService.RequestAPI<CourseDTO>(Endpoints.URL_BASE_UNIVERSITY_API, Endpoints.POST_COURSES, courseDTO, ApiService.Method.Post);
-                if (responseDTO.Code < 200 || responseDTO.Code > 200)
+                if (responseDTO.Code < 200 || responseDTO.Code > 299)
                     massage = responseDTO.Message;
                 this.IsEnabled = true;
                 this.IsRunning = false;

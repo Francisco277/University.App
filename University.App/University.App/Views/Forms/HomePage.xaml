@@ -3,28 +3,69 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              BindingContext="{Binding Main,Source={StaticResource Locator}}"
              x:Class="University.App.Views.Forms.HomePage">
-    
-    
+
+
     <ContentPage.Content>
-        
+
         <ScrollView BindingContext="{Binding Home}">
-            
+
             <StackLayout>
-            <Label Text="COURSES"
-                VerticalOptions="CenterAndExpand" 
+
+                <Label Text="COURSES"
+          
                 HorizontalOptions="CenterAndExpand"
                    FontSize="24">
 
 
-                <Label.GestureRecognizers>
-                    
-                    <TapGestureRecognizer Command="{Binding GetCourseCommand}"/>
-                    
-                </Label.GestureRecognizers>
+                    <Label.GestureRecognizers>
+
+                        <TapGestureRecognizer Command="{Binding GetInstructorsCommand}"/>
+
+                    </Label.GestureRecognizers>
+
+                </Label>
+                <Label Text="ESTUDENTS"
+                HorizontalOptions="CenterAndExpand"
+                   FontSize="24">
 
 
-            </Label>
-        </StackLayout>
-        </ScrollView> 
+                    <Label.GestureRecognizers>
+
+                        <TapGestureRecognizer Command="{Binding GetStudentsCommand}"/>
+
+                    </Label.GestureRecognizers>
+
+                </Label>
+
+                <Label Text="INSTRUCTORS"
+                HorizontalOptions="CenterAndExpand"
+                   FontSize="24">
+
+
+                    <Label.GestureRecognizers>
+
+                        <TapGestureRecognizer Command="{Binding GetInstructorsCommand}"/>
+
+                    </Label.GestureRecognizers>
+                </Label>
+
+
+
+                <Label Text="OFFICES"
+                HorizontalOptions="CenterAndExpand"
+                   FontSize="24">
+
+
+                    <Label.GestureRecognizers>
+
+                        <TapGestureRecognizer Command="{Binding GetOfficesCommand}"/>
+
+                    </Label.GestureRecognizers>
+                </Label>
+
+
+            </StackLayout>
+
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

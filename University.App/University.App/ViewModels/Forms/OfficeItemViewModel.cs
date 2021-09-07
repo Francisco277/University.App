@@ -9,26 +9,26 @@ using Xamarin.Forms;
 
 namespace University.App.ViewModels.Forms
 {
-    public class CourseItemViewModel : CourseDTO
+    public class OfficeItemViewModel : OfficeDTO
     {
         #region Fields
         private ApiService _apiService;
-
         #endregion
+
 
         #region Methods
 
-        async void EditCourse()
+        async void EditOffice()
         {
-            MainViewModel.GetInstance().EditCourse = new EditCourseViewModel(this);
-            await Application.Current.MainPage.Navigation.PushAsync(new EditCoursesPage());
+            MainViewModel.GetInstance().EditOffice = new EditOfficeViewModel(this);
+            await Application.Current.MainPage.Navigation.PushAsync(new EditOfficesPage());
         }
 
-        async void DeleteCourse()
+        async void DeleteOffice()
         {
             try
             {
-                var answer = await Application.Current.MainPage.DisplayAlert("Notification", "Delete Confirm", "YES","NO");
+                var answer = await Application.Current.MainPage.DisplayAlert("Notification", "Delete Confirm", "YES", "NO");
                 if (!answer)
                     return;
 
@@ -43,7 +43,7 @@ namespace University.App.ViewModels.Forms
 
 
                 var message = "The process is successful";
-                var responseDTO = await _apiService.RequestAPI<CourseDTO>(Endpoints.URL_BASE_UNIVERSITY_API, Endpoints.DELETE_COURSES + this.CourseID, null, ApiService.Method.Delete);
+                var responseDTO = await _apiService.RequestAPI<OfficeDTO>(Endpoints.URL_BASE_UNIVERSITY_API, Endpoints.DELETE_OFFICES + this.InstructorID, null, ApiService.Method.Delete);
 
                 if (responseDTO.Code < 200 || responseDTO.Code > 299)
                     message = responseDTO.Message;
@@ -60,18 +60,21 @@ namespace University.App.ViewModels.Forms
         }
         #endregion
 
-        #region Commands
-        public Command EditCourseCommand { get; set; }
-        public Command DeleteCourseCommand { get; set; }
+          #region Commands
+        public Command EditOfficeCommand { get; set; }
+        public Command DeleteOfficeCommand { get; set; }
         #endregion
 
+
         #region Constructor
-        public CourseItemViewModel()
+        public OfficeItemViewModel()
         {
             this._apiService = new ApiService();
-            this.DeleteCourseCommand = new Command(DeleteCourse);
-            this.EditCourseCommand = new Command(EditCourse);
+            this.DeleteOfficeCommand = new Command(DeleteOffice);
+            this.EditOfficeCommand = new Command(EditOffice);
         }
         #endregion
     }
+
 }
+

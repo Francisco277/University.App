@@ -1,18 +1,18 @@
-﻿
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              BindingContext="{Binding Main,Source={StaticResource Locator}}"
-             x:Class="University.App.Views.Forms.CreateStudentsPage">
-
+             x:Class="University.App.Views.Forms.EditInstructorPage">
     <ContentPage.Content>
-        <ScrollView BindingContext="{Binding CreateStudent}">
+        <ScrollView BindingContext="{Binding EditInstructor}">
             <StackLayout Padding="20"
                          VerticalOptions="Start">
 
                 <Frame BackgroundColor="Black"
                    CornerRadius="14">
-                    <Label Text="CREATE STUDENTS" TextColor="White" FontSize="19" HorizontalTextAlignment="Center"/>
+                    <Label Text="EDIT INSTRUCTORS" TextColor="White" FontSize="19" HorizontalTextAlignment="Center"/>
                 </Frame>
+
 
 
                 <Grid Margin="10, 0">
@@ -24,20 +24,23 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Label Text="DATETIME" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
-                    <DatePicker  Grid.Row="0" Grid.Column="1" Date="{Binding Enrollmentdate}"/>
-                  
 
-                    <Label Text="LASTNAME" Grid.Row="1" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry  Grid.Row="1" Grid.Column="1" Text="{Binding Lastname}"/>
+                    <Label Text="ID" Grid.Row="0" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry  Grid.Row="0" Grid.Column="1" Text="{Binding Instructor.ID}"
+                            IsEnabled="False"/>
 
-                    <Label Text="FIRSTMIDNAME" Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
-                    <Entry  Grid.Row="2" Grid.Column="1"  Text="{Binding Firstmidname}"/>
+                    <Label Text="DATETIME" Grid.Row="2" Grid.Column="0" VerticalOptions="Center"/>
+                    <DatePicker  Grid.Row="2" Grid.Column="1" Date="{Binding Instructor.HireDate}"/>
 
 
+                    <Label Text="LASTNAME" Grid.Row="3" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry  Grid.Row="3" Grid.Column="1" Text="{Binding Instructor.LastName}"/>
+
+                    <Label Text="FIRSTMIDNAME" Grid.Row="4" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry  Grid.Row="4" Grid.Column="1"  Text="{Binding Instructor.FirstMidName}"/>
                 </Grid>
 
                 <Button Text="Save" 
@@ -45,11 +48,12 @@
                         HeightRequest="46" 
                         Background="Black" 
                         TextColor="White"
-                        Command="{Binding CreateStudentCommand}"
+                        Command="{Binding EditInstructorCommand}"
                         IsEnabled="{Binding IsEnabled}"/>
 
                 <ActivityIndicator
                     IsRunning="{Binding IsRunning}"/>
+
 
             </StackLayout>
         </ScrollView>

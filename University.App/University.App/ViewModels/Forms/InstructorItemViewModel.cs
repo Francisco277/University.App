@@ -9,7 +9,8 @@ using Xamarin.Forms;
 
 namespace University.App.ViewModels.Forms
 {
-    public class CourseItemViewModel : CourseDTO
+   public class InstructorItemViewModel : InstructorDTO
+
     {
         #region Fields
         private ApiService _apiService;
@@ -18,17 +19,17 @@ namespace University.App.ViewModels.Forms
 
         #region Methods
 
-        async void EditCourse()
+        async void EditInstructor()
         {
-            MainViewModel.GetInstance().EditCourse = new EditCourseViewModel(this);
-            await Application.Current.MainPage.Navigation.PushAsync(new EditCoursesPage());
+            MainViewModel.GetInstance().EditInstructor = new EditInstructorViewModel(this);
+            await Application.Current.MainPage.Navigation.PushAsync(new EditInstructorPage());
         }
 
-        async void DeleteCourse()
+        async void DeleteInstructor()
         {
             try
             {
-                var answer = await Application.Current.MainPage.DisplayAlert("Notification", "Delete Confirm", "YES","NO");
+                var answer = await Application.Current.MainPage.DisplayAlert("Notification", "Delete Confirm", "YES", "NO");
                 if (!answer)
                     return;
 
@@ -43,9 +44,9 @@ namespace University.App.ViewModels.Forms
 
 
                 var message = "The process is successful";
-                var responseDTO = await _apiService.RequestAPI<CourseDTO>(Endpoints.URL_BASE_UNIVERSITY_API, Endpoints.DELETE_COURSES + this.CourseID, null, ApiService.Method.Delete);
+                var responseDTO = await _apiService.RequestAPI<InstructorDTO>(Endpoints.URL_BASE_UNIVERSITY_API, Endpoints.DELETE_INSTRUCTORS + this.ID, null, ApiService.Method.Delete);
 
-                if (responseDTO.Code < 200 || responseDTO.Code > 299)
+                if (responseDTO.Code < 200 || responseDTO.Code > 200)
                     message = responseDTO.Message;
 
 
@@ -61,17 +62,19 @@ namespace University.App.ViewModels.Forms
         #endregion
 
         #region Commands
-        public Command EditCourseCommand { get; set; }
-        public Command DeleteCourseCommand { get; set; }
+        public Command EditInstructorCommand { get; set; }
+        public Command DeleteInstructorCommand { get; set; }
         #endregion
 
         #region Constructor
-        public CourseItemViewModel()
+        public InstructorItemViewModel()
         {
             this._apiService = new ApiService();
-            this.DeleteCourseCommand = new Command(DeleteCourse);
-            this.EditCourseCommand = new Command(EditCourse);
+            this.DeleteInstructorCommand = new Command(DeleteInstructor);
+            this.EditInstructorCommand = new Command(EditInstructor);
         }
         #endregion
     }
 }
+
+    

@@ -8,16 +8,18 @@ using Xamarin.Forms;
 
 namespace University.App.ViewModels.Forms
 {
-    public class CreateStudentViewModel : BaseViewModel
+   public class CreateInstructorViewModel : BaseViewModel
     {
         #region Fields 
         private ApiService _apiService;
         private string _LastName;
         private string _FirstMidName;
-        private DateTime _EnrollmentDate;
+        private DateTime _HireDate;
         private bool _isEnabled;
         private bool _isRunning;
         #endregion
+
+
 
         #region Properties 
         public bool IsEnabled
@@ -44,32 +46,32 @@ namespace University.App.ViewModels.Forms
             set { this.SetValue(ref this._FirstMidName, value); }
         }
 
-        public DateTime Enrollmentdate
+        public DateTime HireDate
         {
-            get { return this._EnrollmentDate; }
-            set { this.SetValue(ref this._EnrollmentDate, value); }
+            get { return this._HireDate; }
+            set { this.SetValue(ref this._HireDate, value); }
         }
 
         #endregion
 
         #region Constructor
-        public CreateStudentViewModel()
+        public CreateInstructorViewModel()
         {
             this._apiService = new ApiService();
-            this.CreateStudentCommand = new Command(CreateStudent);
+            this.CreateInstructorCommand = new Command(CreateInstructor);
             this.IsEnabled = true;
-            this.Enrollmentdate = DateTime.Now;
+            this.HireDate = DateTime.Now;
         }
         #endregion
 
         #region Methods
 
-        async void CreateStudent()
+        async void CreateInstructor()
         {
             try
             {
                 if (string.IsNullOrEmpty(this.Lastname) ||
-                    string.IsNullOrEmpty(this.Enrollmentdate.ToString())
+                    string.IsNullOrEmpty(this.HireDate.ToString())
                     || string.IsNullOrEmpty(this.Firstmidname))
                 {
                     await Application.Current.MainPage.DisplayAlert("Notification", "The fields are required", "Cancel");
@@ -89,23 +91,23 @@ namespace University.App.ViewModels.Forms
 
                 }
 
-                var studenDTO = new StudentDTO
+                var instructorDTO = new InstructorDTO
                 {
-                    EnrollmentDate = this.Enrollmentdate,
+                    HireDate = this.HireDate,
                     LastName = this.Lastname,
                     FirstMidName = this.Firstmidname
 
                 };
 
                 var massage = "The process is successful";
-                var responseDTO = await _apiService.RequestAPI<StudentDTO>(Endpoints.URL_BASE_UNIVERSITY_API, Endpoints.POST_STUDENTS, studenDTO, ApiService.Method.Post);
+                var responseDTO = await _apiService.RequestAPI<InstructorDTO>(Endpoints.URL_BASE_UNIVERSITY_API, Endpoints.POST_INTRUCTORS, instructorDTO, ApiService.Method.Post);
                 if (responseDTO.Code < 200 || responseDTO.Code > 299)
                     massage = responseDTO.Message;
 
                 this.IsEnabled = true;
                 this.IsRunning = false;
 
-                this.Enrollmentdate = DateTime.Now;
+                this.HireDate = DateTime.Now;
                 this.Lastname = string.Empty;
                 this.Firstmidname = string.Empty;
 
@@ -122,7 +124,8 @@ namespace University.App.ViewModels.Forms
         #endregion
 
         #region Commands 
-        public Command CreateStudentCommand { get; set; }
+        public Command CreateInstructorCommand { get; set; }
         #endregion
+
     }
 }

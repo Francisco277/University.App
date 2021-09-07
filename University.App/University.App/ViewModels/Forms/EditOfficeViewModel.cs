@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using University.App.Helpers;
 using University.BL.DTOs;
 using University.BL.Services.Implements;
@@ -7,11 +9,11 @@ using Xamarin.Forms;
 
 namespace University.App.ViewModels.Forms
 {
-    public class CreateOfficeViewModel : BaseViewModel
+    public class EditOfficeViewModel : BaseViewModel
     {
         #region Fields
         private ApiService _apiService;
-        private string _location;
+        private OfficeDTO _office;
         private bool _isEnabled;
         private bool _isRunning;
         private List<InstructorDTO> _instructors;
@@ -34,10 +36,10 @@ namespace University.App.ViewModels.Forms
         }
 
 
-        public string Location
+        public OfficeDTO Office
         {
-            get { return this._location; }
-            set { this.SetValue(ref this._location, value); }
+            get { return this._office; }
+            set { this.SetValue(ref this._office, value); }
         }
 
         public List<InstructorDTO> Instructors
@@ -53,19 +55,24 @@ namespace University.App.ViewModels.Forms
         }
         #endregion
 
+
+
         #region constructor
-        public CreateOfficeViewModel()
+        public EditOfficeViewModel(OfficeDTO office)
         {
             this._apiService = new ApiService();
-            this.CreateOfficeCommand = new Command(CreateOffice);
+            this.EditOfficeCommand = new Command(EditOffice);
             this.GetInstructorsCommand = new Command(GetInstructors);
             this.GetInstructorsCommand.Execute(null);
             this.IsEnabled = true;
+
+            this.Office = office;
+            
         }
         #endregion
 
-        #region Methods
 
+        #region Methods
         async void GetInstructors()
         {
             try
@@ -83,7 +90,7 @@ namespace University.App.ViewModels.Forms
                 var responseDTO = await _apiService.RequestAPI<List<InstructorDTO>>(Endpoints.URL_BASE_UNIVERSITY_API, Endpoints.GET_INSTRUCTORS, null, ApiService.Method.Get);
 
                 this.Instructors = (List<InstructorDTO>)responseDTO.Data;
-                    
+                this.InstructorSelected = this.Instructors.FirstOrDefault(x => x.ID == this.Office.InstructorID);
             }
             catch (Exception ex)
             {
@@ -92,14 +99,13 @@ namespace University.App.ViewModels.Forms
             }
         }
 
-
-        async void CreateOffice()
+        async void EditOffice()
         {
             try
             {
-                if (string.IsNullOrEmpty(this.Location) ||
+                if (string.IsNullOrEmpty(this.Office.Location) ||
                     this.InstructorSelected == null)
-                  
+
                 {
                     await Application.Current.MainPage.DisplayAlert("Notification", "the fields are required", "Cancel");
                     return;
@@ -118,15 +124,9 @@ namespace University.App.ViewModels.Forms
                     await Application.Current.MainPage.DisplayAlert("Notification", "No internet Connection", "Cancel");
                     return;
                 }
-
-                var oficceDTO = new OfficeDTO
-                {
-                    Location = this.Location,
-                    InstructorID = this.InstructorSelected.ID,
-                };
-
+                this.Office.InstructorID = this.InstructorSelected.ID;
                 var massage = "The process is successful";
-                var responseDTO = await _apiService.RequestAPI<OfficeDTO>(Endpoints.URL_BASE_UNIVERSITY_API, Endpoints.POST_OFFICES, oficceDTO, ApiService.Method.Post);
+                var responseDTO = await _apiService.RequestAPI<OfficeDTO>(Endpoints.URL_BASE_UNIVERSITY_API, Endpoints.PUT_OFFICES + this.Office.InstructorID, this.Office, ApiService.Method.Put);
 
                 if (responseDTO.Code < 200 || responseDTO.Code > 299)
                     massage = responseDTO.Message;
@@ -134,7 +134,7 @@ namespace University.App.ViewModels.Forms
                 this.IsEnabled = true;
                 this.IsRunning = false;
 
-                this.Location = string.Empty;
+                this.Office.Location = string.Empty;
 
                 await Application.Current.MainPage.DisplayAlert("Notification", massage, "Cancel");
 
@@ -147,14 +147,13 @@ namespace University.App.ViewModels.Forms
             }
 
         }
+
         #endregion
 
+
         #region Commands
-        public Command CreateOfficeCommand { get; set; }
+        public Command EditOfficeCommand { get; set; }
         public Command GetInstructorsCommand { get; set; }
-    #endregion
-
-
-}
-
+        #endregion
+    }
 }

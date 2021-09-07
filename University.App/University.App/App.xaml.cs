@@ -13,6 +13,7 @@ namespace University.App
 
            
             MainPage = new NavigationPage(new HomePage());
+          
         }
 
         protected override void OnStart()

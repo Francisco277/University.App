@@ -23,10 +23,16 @@ namespace University.App.Helpers
 
         #region INSTRUCTORS
         public static string GET_INSTRUCTORS { get; set; } = "api/Instructors/GetInstructors/";
+        public static string DELETE_INSTRUCTORS { get; set; } = "api/Instructors/";
+        public static string PUT_INSTRUCTORS { get; set; } = "api/Instructors/";
+        public static string POST_INTRUCTORS { get; set; } = "api/Instructors";
         #endregion
 
         #region OFFICE
-        public static string POST_OFFICES { get; set; } = "api/OfficeAssignments/";
+        public static string POST_OFFICES { get; set; } = "api/OfficeAssignments";
+        public static string PUT_OFFICES { get; set; } = "api/OfficeAssignments/";
+        public static string DELETE_OFFICES { get; set; } = "api/OfficeAssignments/";
+        public static string GET_OFFICES { get; set; } = "api/OfficeAssignments/";
         #endregion
     }
 }
