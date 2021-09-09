@@ -5,13 +5,13 @@
              x:Class="University.App.Views.Forms.HomePage">
 
 
-    <ContentPage.Content>
+    <ContentPage.Content >
 
-        <ScrollView BindingContext="{Binding Home}">
+        <ScrollView BindingContext="{Binding Home}" BackgroundColor="Black">
 
             <StackLayout>
 
-                <Label Text="COURSES"
+                <Label Text="COURSES" TextColor="White"
           
                 HorizontalOptions="CenterAndExpand"
                    FontSize="24">
@@ -19,12 +19,12 @@
 
                     <Label.GestureRecognizers>
 
-                        <TapGestureRecognizer Command="{Binding GetInstructorsCommand}"/>
+                        <TapGestureRecognizer Command="{Binding GetCourseCommand}"/>
 
                     </Label.GestureRecognizers>
 
                 </Label>
-                <Label Text="ESTUDENTS"
+                <Label Text="ESTUDENTS" TextColor="White"
                 HorizontalOptions="CenterAndExpand"
                    FontSize="24">
 
@@ -37,7 +37,7 @@
 
                 </Label>
 
-                <Label Text="INSTRUCTORS"
+                <Label Text="INSTRUCTORS" TextColor="White"
                 HorizontalOptions="CenterAndExpand"
                    FontSize="24">
 
@@ -51,7 +51,7 @@
 
 
 
-                <Label Text="OFFICES"
+                <Label Text="OFFICES" TextColor="White"
                 HorizontalOptions="CenterAndExpand"
                    FontSize="24">
 
