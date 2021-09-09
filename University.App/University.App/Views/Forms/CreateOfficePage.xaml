@@ -13,7 +13,7 @@
 
                     <Frame BackgroundColor="Black"
                    CornerRadius="14">
-                        <Label Text="NEW OFFICE" TextColor="White" FontSize="19" HorizontalTextAlignment="Center"/>
+                        <Label Text="CREATE OFFICE" TextColor="White" FontSize="19" HorizontalTextAlignment="Center"/>
                     </Frame>
 
 

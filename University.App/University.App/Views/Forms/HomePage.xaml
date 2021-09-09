@@ -16,6 +16,7 @@
                 HorizontalOptions="CenterAndExpand"
                    FontSize="24">
 
+                    
 
                     <Label.GestureRecognizers>
 
